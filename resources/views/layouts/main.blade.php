@@ -15,4 +15,4 @@
     </div>
     @yield('main-section')
   </body>
-</html>
+</html>\
