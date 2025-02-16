@@ -1,18 +1,36 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @stack('head') <!--this helps to create a stack-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <div class="bg-dark"> 
-        <div class="container py-3"> <!-- container with padding 3 -->
-            <div class="h1 text-white">Todo List App</div>
-        </div>
+@extends('\layouts.main') <!-- Extending layout\main -->
+
+@push('head')<!—we have created a stack and pushing this header information-->
+<title>Todo List App</title>
+@endpush
+
+@section('main-section')
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center my-5"> 
+<!—flex-direction view with Margin 5-->
+        <div class="h2">All Todos</div>
+        <a href="{{route("todo.create")}}" class="btn btn-primary btn-lg">Add Todo</a>
     </div>
-    @yield('main-section')
-  </body>
-</html>
+    <!-- {{print_r($todos)}} -->
+    <table class="table table-stripped table-dark">
+        <tr>
+            <th>Task Name</th>
+            <th>Description</th>
+            <th>Due date</th>
+            <th>Action</th>
+        </tr>
+        @foreach($todos as $todo)
+            <tr valign="middle">
+                <td>{{$todo->name}}</td>
+                <td>{{$todo->work}}</td>
+                <td>{{$todo->duedate}}</td>
+                <td>
+                    <a href="{{route("todo.edit",$todo->id)}}" class="btn btn-success btn-sm">Update</a>
+                    <a href="{{route("todo.delete",$todo->id)}}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        @endforeach        
+    </table>
+</div>
+
+@endsection
