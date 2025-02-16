@@ -1,22 +1,36 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TodoController; // Import the controller
+use App\Http\Controllers\todosController;
 
-// Home route (Showing all todos)
-Route::get('/', [TodoController::class, 'index'])->name('todo.home');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
-// Route to show the "create todo" form
-Route::get('/todo/create', [TodoController::class, 'create'])->name('todo.create');
 
-// Route to store a new todo (form submission)
-Route::post('/todo/store', [TodoController::class, 'store'])->name('todo.store');
+//homepage todo route
+Route::get('/',[todosController::class, 'index'])->name("todo.home");
 
-// Route to show the "edit todo" form
-Route::get('/todo/{id}/edit', [TodoController::class, 'edit'])->name('todo.edit');
+//create todo route
+Route::get('/create', function () {
+    return view('create');
+})->name("todo.create");
 
-// Route to update a todo
-Route::post('/todo/{id}/update', [TodoController::class, 'update'])->name('todo.update');
+//edit todo route
+Route::get('/edit/{id}',[todosController::class,'edit'])->name("todo.edit");
 
-// Route to delete a todo
-Route::get('/todo/{id}/delete', [TodoController::class, 'destroy'])->name('todo.delete');
+//update todo route
+Route::post('/update', [todosController::class,'updateData'])->name("todo.updateData");
+
+//store todo route
+Route::post('/create', [todosController::class,'store'])->name("todo.store");
+
+//delete toto route
+Route::get('/delete/{id}', [todosController::class,'delete'])->name("todo.delete");
