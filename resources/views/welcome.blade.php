@@ -1,4 +1,4 @@
-@extends('\layouts.main') <!-- Extending layout\main -->
+@extends('\layouts.main') 
 
 @push('head')<!—we have created a stack and pushing this header information-->
 <title>Todo List App</title>
