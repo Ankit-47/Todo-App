@@ -6,28 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('todos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function up()
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('work');
             $table->string('duedate');
-            $table->timestamps();
+            $table->timestamps(); // This will create created_at and updated_at columns
         });
     }
-};
+    
+    public function down()
+    {
+        Schema::dropIfExists('todos');
+    }
+};    
